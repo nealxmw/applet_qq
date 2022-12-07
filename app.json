@@ -1,12 +1,31 @@
 {
   "pages":[
-    "pages/index/index",
-    "pages/logs/logs"
+    "pages/translate/translate",
+    "pages/more/more"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "QQ小程序",
+    "navigationBarTitleText": "尼尔英语",
     "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "color":"#5BC7FC",
+    "selectedColor":"#FF6950",
+    "backgroundColor":"#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/translate/translate",
+        "text": "翻译",
+        "iconPath":"./image/pencial.png",
+        "selectedIconPath":"./image/book.png"
+      },
+      {
+        "pagePath": "pages/more/more",
+        "text": "更多",
+        "iconPath":"./image/pencial.png",
+        "selectedIconPath":"./image/bag.png"
+      }
+    ]
   }
 }

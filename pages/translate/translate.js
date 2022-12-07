@@ -1,10 +1,12 @@
 //index.js
 //获取应用实例
 const app = getApp()
+import { en2zh } from '../../utils/youdao.js'
 
 Page({
   data: {
-    motto: 'Hello World',
+    icon: '../../image/translate.png',
+    state: '中',
     userInfo: {},
     hasUserInfo: false,
     canIUse: qq.canIUse('button.open-type.getUserInfo')
@@ -16,6 +18,16 @@ Page({
     })
   },
   onLoad: function () {
+    qq.request({
+      url: 'https://openapi.youdao.com/api', // 仅为示例，并非真实的接口地址
+      data: en2zh('account'),
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success (e) {
+        console.log(e.data, 'youdao')
+      }
+    })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

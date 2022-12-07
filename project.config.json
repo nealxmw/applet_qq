@@ -1,13 +1,13 @@
 {
 	"projectid": "1112186905_applet_qq",
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": false,
 		"minified": true,
 		"newFeature": true,
 		"autoAudits": false,
-		"nodeModules": true,
+		"nodeModules": false,
 		"uploadWithSourceMap": true,
 		"uglifyFileName": true,
 		"remoteDebugLogEnable": false,
@@ -24,7 +24,11 @@
 	},
 	"qqappid": "1112186905",
 	"projectname": "applet_qq",
-	"scripts": {},
+	"scripts": {
+		"beforeCompile": "",
+		"beforePreview": "",
+		"beforeUpload": ""
+	},
 	"condition": {
 		"search": {
 			"current": -1,
