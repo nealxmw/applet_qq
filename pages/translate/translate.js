@@ -1,66 +1,101 @@
 //index.js
-//获取应用实例
-const app = getApp()
 import { en2zh } from '../../utils/youdao.js'
-
+const app = getApp()
+const innerAudioContext = qq.createInnerAudioContext()
+const audioPath = 'https://dict.youdao.com/dictvoice?audio='
 Page({
   data: {
-    icon: '../../image/translate.png',
-    state: '中',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: qq.canIUse('button.open-type.getUserInfo')
+    langList: [
+      { key: 'zh-CHS', value: '中文' },
+      { key: 'en', value: '英语' }
+    ],
+    langIndex: 0,
+    tolangIndex: 1,
+    isInput: false,
+    inputText: '',
+    outputText: '',
+    isListen: false
   },
-  //事件处理函数
-  bindViewTap: function () {
-    qq.navigateTo({
-      url: '../logs/logs'
-    })
-  },
-  onLoad: function () {
-    qq.request({
-      url: 'https://openapi.youdao.com/api', // 仅为示例，并非真实的接口地址
-      data: en2zh('account'),
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success (e) {
-        console.log(e.data, 'youdao')
-      }
-    })
-    if (app.globalData.userInfo) {
+  // 原语言
+  langPickerChange (e) {
+    if (e.detail.value) {
       this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
+        langIndex: Number(e.detail.value)
       })
-    } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      qq.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
+    }
+  },
+  // 翻译语言
+  tolangPickerChange (e) {
+    if (e.detail.value) {
+      this.setData({
+        tolangIndex: Number(e.detail.value)
+      })
+    }
+  },
+  // 语言互换
+  switchLang () {
+    let index = this.data.langIndex
+    let _index = this.data.tolangIndex
+    this.setData({
+      langIndex: _index,
+      tolangIndex: index
+    })
+  },
+  // 输入
+  inputInput (e) {
+    this.setData({
+      inputText: e.detail.value,
+      outputText: ''
+    })
+  },
+  // 确认输入
+  confirmInput (e) {
+    console.log(e.detail.value)
+    let _this = this
+    if (e.detail.value) {
+      this.setData({
+        inputText: e.detail.value
+      })
+      // 翻译
+      qq.request({
+        url: 'https://openapi.youdao.com/api', // 仅为示例，并非真实的接口地址
+        data: en2zh(this.data.inputText, this.data.langList[this.data.langIndex].key, this.data.langList[this.data.tolangIndex].key),
+        header: {
+          'content-type': 'application/json' // 默认值
+        },
+        success (e) {
+          console.log(e.data, 'youdao')
+          _this.setData({
+            outputText: e.data.translation[0]
           })
+          // qq.showModal({
+          //   title: '结果',
+          //   content: e.data.translation[0],
+          //   showCancel: false
+          // })
         }
       })
     }
   },
-  getUserInfo: function (e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
+
+  //  听读音
+  listen () {
+    console.log(audioPath + this.data.outputText.replaceAll(" ", "_"))
+    innerAudioContext.src = audioPath + this.data.outputText.replaceAll(" ", "_")
     this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+      isListen: true
     })
+    innerAudioContext.play()
+    setTimeout(() => {
+      this.setData({
+        isListen: false
+      })
+    }, 1500)
+  },
+  copy () {
+
+  },
+  onLoad: function () {
+    // 数据初始化
   }
 })

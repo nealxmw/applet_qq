@@ -1,31 +1,38 @@
 {
-  "pages":[
-    "pages/translate/translate",
-    "pages/more/more"
-  ],
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "尼尔英语",
-    "navigationBarTextStyle":"black"
-  },
-  "tabBar": {
-    "color":"#5BC7FC",
-    "selectedColor":"#FF6950",
-    "backgroundColor":"#ffffff",
-    "list": [
-      {
-        "pagePath": "pages/translate/translate",
-        "text": "翻译",
-        "iconPath":"./image/pencial.png",
-        "selectedIconPath":"./image/book.png"
-      },
-      {
-        "pagePath": "pages/more/more",
-        "text": "更多",
-        "iconPath":"./image/pencial.png",
-        "selectedIconPath":"./image/bag.png"
-      }
-    ]
-  }
+	"pages": [
+		"pages/translate/translate",
+		"pages/learn/learn",
+		"pages/more/more"
+	],
+	"window": {
+		"backgroundTextStyle": "light",
+		"navigationBarBackgroundColor": "#fff",
+		"navigationBarTitleText": "尼尔英语",
+		"navigationBarTextStyle": "black"
+	},
+	"tabBar": {
+		"color": "#666666",
+		"selectedColor": "#FF6950",
+		"backgroundColor": "#ffffff",
+		"list": [
+			{
+				"pagePath": "pages/translate/translate",
+				"text": "翻译",
+				"iconPath": "./image/en.png",
+				"selectedIconPath": "./image/girl.png"
+			},
+			{
+				"pagePath": "pages/learn/learn",
+				"text": "学习",
+				"iconPath": "./image/book.png",
+				"selectedIconPath": "./image/girl.png"
+			},
+			{
+				"pagePath": "pages/more/more",
+				"text": "更多",
+				"iconPath": "./image/bag.png",
+				"selectedIconPath": "./image/girl.png"
+			}
+		]
+	}
 }
