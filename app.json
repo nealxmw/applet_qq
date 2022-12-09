@@ -1,5 +1,6 @@
 {
 	"pages": [
+		"pages/dictionary/dictionary",
 		"pages/translate/translate",
 		"pages/learn/learn",
 		"pages/more/more"
@@ -15,6 +16,12 @@
 		"selectedColor": "#FF6950",
 		"backgroundColor": "#ffffff",
 		"list": [
+			{
+				"pagePath": "pages/dictionary/dictionary",
+				"text": "字典",
+				"iconPath": "./image/dictionary.png",
+				"selectedIconPath": "./image/girl.png"
+			},
 			{
 				"pagePath": "pages/translate/translate",
 				"text": "翻译",
